@@ -86,6 +86,15 @@
       <button>Trigger a Global Error</button>
     </section>
   </main>
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+    window.TrackJS && TrackJS.install({
+      token: "ad2a8f57440f479191a1e459d94e859a"
+      // for more configuration options, see https://docs.trackjs.com
+    });
+  </script>
+
+
 
   <script>
     let form = document.querySelector('form');
@@ -102,6 +111,123 @@
 
     // Start your code here
     // You may move this JS to another file if you wish
+    class myError extends Error {
+      constructor(errorMessage) {
+        super(errorMessage);
+        this.name = "myError";
+      }
+    }
+
+    errorBtns[0].addEventListener('click', function () {
+      let first = document.getElementById('first-num').value;
+      let operator = document.getElementById('operator').value;
+      let second = document.getElementById('second-num').value;
+      let output = document.querySelector('output').value;
+      console.log(first + " " + operator + " " + second + ' = ' + output);
+    });
+
+    errorBtns[1].addEventListener('click', function () {
+      let first = document.getElementById('first-num').value;
+      let operator = document.getElementById('operator').value;
+      let second = document.getElementById('second-num').value;
+      let output = document.querySelector('output').value;
+      console.error(first + " " + operator + " " + second + ' = ' + output);
+    });
+
+    errorBtns[2].addEventListener('click', function () {
+      let first = document.getElementById('first-num').value;
+      let operator = document.getElementById('operator').value;
+      let second = document.getElementById('second-num').value;
+      let output = document.querySelector('output').value;
+      console.count(first + " " + operator + " " + second + ' = ' + output);
+    });
+
+    errorBtns[3].addEventListener('click', function () {
+      let first = document.getElementById('first-num').value;
+      let operator = document.getElementById('operator').value;
+      let second = document.getElementById('second-num').value;
+      let output = document.querySelector('output').value;
+      console.warn(first + " " + operator + " " + second + ' = ' + output);
+    });
+    errorBtns[4].addEventListener('click', function () {
+      let first = document.getElementById('first-num').value;
+      let operator = document.getElementById('operator').value;
+      let second = document.getElementById('second-num').value;
+      let output = document.querySelector('output').value;
+      console.assert(output < -5000000);
+    });
+    errorBtns[5].addEventListener('click', function () {
+      console.clear();
+    });
+    errorBtns[6].addEventListener('click', function () {
+      console.dir(document.body)
+    });
+    errorBtns[7].addEventListener('click', function () {
+      console.dirxml(document.body);
+    });
+    errorBtns[8].addEventListener('click', function () {
+      console.group("awoiejfoiajwef");
+    });
+    errorBtns[9].addEventListener('click', function () {
+      console.groupEnd('aoiwejfoiawjef');
+    });
+    errorBtns[10].addEventListener('click', function () {
+      console.table([
+        {
+          name: 'Wesley',
+          age: 20,
+          height: '6 foot 1'
+        },
+        {
+          name: 'Helen',
+          age: 20,
+          height: '5 foot 1'
+        }
+      ]);
+    });
+
+    errorBtns[11].addEventListener('click', function () {
+      console.time();
+    });
+
+    errorBtns[12].addEventListener('click', function () {
+      console.timeEnd();
+    });
+
+    errorBtns[13].addEventListener('click', function () {
+      console.trace();
+    });
+    errorBtns[14].addEventListener('click', function () {
+      console.log(test(5));
+      errorMessageFunction()
+    });
+
+    function test(num) {
+      try {
+        return num / 0 / 3;
+      } catch (error) {
+        throw Error;
+        console.err(error);
+        console.err("throwing error");
+      } finally {
+        console.log('final');
+      }
+    }
+
+    function errorMessageFunction() {
+      try {
+        throw new myError('this is the error I wrote');
+      } catch (error) {
+        alert(error.message);
+        TrackJS.track('tracking');
+      }
+    }
+
+
+
+
+
+
   </script>
 </body>
 
